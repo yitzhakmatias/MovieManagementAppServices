@@ -9,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("MovieDb")); // Use an in-memory database
 
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();/*
 builder.Services.AddScoped<IActorRepository, ActorRepository>();
-builder.Services.AddScoped<IMovieRatingRepository, MovieRatingRepository>();
+builder.Services.AddScoped<IMovieRatingRepository, MovieRatingRepository>();*/
 builder.Services.AddControllers();
 
 // Add Swagger for API documentation
