@@ -1,7 +1,7 @@
 ﻿namespace MovieManagementAppServices.Data
 {
     using Microsoft.EntityFrameworkCore;
-    using MovieManagementApp.Core.Entities; // Assuming your entities are in the Core.Entities namespace
+    using MovieManagementAppServices.Core.Entities;
 
     namespace MovieManagementApp.Data
     {

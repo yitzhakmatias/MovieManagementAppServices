@@ -1,5 +1,7 @@
-﻿using MovieManagementAppServices.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieManagementAppServices.Core.Entities;
 using MovieManagementAppServices.Core.Interfaces;
+using MovieManagementAppServices.Data.MovieManagementApp.Data;
 using System;
 
 namespace MovieManagementAppServices.Infrastructure.Repositories
