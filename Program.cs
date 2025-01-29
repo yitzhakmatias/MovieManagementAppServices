@@ -1,20 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using MovieManagementAppServices.Core.Interfaces;
-using MovieManagementAppServices.Data.MovieManagementApp.Data;
 using MovieManagementAppServices.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("MovieDb")); // Use an in-memory database
-
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();/*
-builder.Services.AddScoped<IActorRepository, ActorRepository>();
-builder.Services.AddScoped<IMovieRatingRepository, MovieRatingRepository>();*/
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("MovieDb"));
+//builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+//builder.Services.AddScoped<IActorRepository, ActorRepository>();
+//builder.Services.AddScoped<IMovieRatingRepository, MovieRatingRepository>();
 builder.Services.AddControllers();
 
-// Add Swagger for API documentation
+// Ensure API explorer is added for Swagger to work
+builder.Services.AddEndpointsApiExplorer();  // This is crucial for Swagger to generate API documentation
+
+// Add Swagger generation
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -32,10 +32,10 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Enable Swagger middleware in Development environment
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.UseSwagger();  // This generates the Swagger JSON
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movie Management API v1");
@@ -43,8 +43,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Use CORS middleware
-app.UseCors("AllowReactApp");  // Apply CORS policy
+// Use CORS middleware (make sure it's properly configured if needed)
+app.UseCors("AllowReactApp");
 
 app.UseAuthorization();
 
